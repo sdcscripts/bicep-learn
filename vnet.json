@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "3577137651568603891"
+    }
+  },
+  "functions": [],
+  "variables": {
+    "locationsouth": "uksouth",
+    "southAddPrefix": "192.168.0.0/16",
+    "southAddSubnet": "192.168.0.0/24",
+    "southSubnetName": "southsubnet",
+    "locationwest": "ukwest",
+    "westAddPrefix": "172.16.0.0/16",
+    "westAddSubnet": "172.16.1.0/24",
+    "westSubnetName": "westsubnet"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2021-02-01",
+      "name": "southvn",
+      "location": "[variables('locationsouth')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('southAddPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('southSubnetName')]",
+            "properties": {
+              "addressPrefix": "[variables('southAddSubnet')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2021-02-01",
+      "name": "westvn",
+      "location": "[variables('locationwest')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('westAddPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('westSubnetName')]",
+            "properties": {
+              "addressPrefix": "[variables('westAddSubnet')]"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
